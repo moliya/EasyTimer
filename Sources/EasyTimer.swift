@@ -8,7 +8,7 @@
 import UIKit
 
 @objc(KFEasyTimerUpdater)
-protocol EasyTimerUpdater: NSObjectProtocol {
+public protocol EasyTimerUpdater: NSObjectProtocol {
     @objc optional func timerUpdate(interval: TimeInterval)
 }
 
