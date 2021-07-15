@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name          = "KFEasyTimer"
-  s.version       = "1.1.0"
+  s.version       = "1.2.0"
   s.summary       = "轻量级的倒计时触发器"
   s.homepage      = "https://github.com/moliya/EasyTimer"
   s.license       = "MIT"
