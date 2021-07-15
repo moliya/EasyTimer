@@ -35,9 +35,9 @@ self.timer = EasyTimer(updater: self, interval: 0.5)
 
 ```swift
 //启动
-timer.start()
+timer.run()
 //停止
-timer.stop()
+timer.pause()
 ```
 
 ```swift
@@ -69,9 +69,9 @@ self.timer = [[KFEasyTimer alloc] initWithUpdater:self interval:0.5];
 
 ```objective-c
 //启动
-[self.timer start];
+[self.timer run];
 //停止
-[self.timer stop];
+[self.timer pause];
 ```
 
 ```objective-c
@@ -108,7 +108,7 @@ pod 'KFEasyTimer'
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/moliya/EasyTimer", from: "1.0.0")
+    .package(url: "https://github.com/moliya/EasyTimer", from: "1.2.0")
 ]
 ```
 
