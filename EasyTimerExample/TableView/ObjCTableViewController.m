@@ -22,7 +22,7 @@
     
     self.timer = [[KFEasyTimer alloc] init];
     self.timer.updater = self.tableView;
-    [self.timer start];
+    [self.timer run];
     NSTimeInterval now = NSDate.date.timeIntervalSince1970;
     self.timeInfo = @[
         @[
@@ -67,7 +67,7 @@
 }
 
 - (void)dealloc {
-    [self.timer stop];
+    NSLog(@"%@已销毁", NSStringFromClass(self.class));
 }
 
 #pragma mark - UITableViewDataSource

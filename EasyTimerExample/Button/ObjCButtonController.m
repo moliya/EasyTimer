@@ -31,18 +31,18 @@
         return;
     }
     self.count = 30;
-    [self.timer start];
+    [self.timer run];
 }
 
 - (void)dealloc {
-    [self.timer stop];
+    NSLog(@"%@已销毁", NSStringFromClass(self.class));
 }
 
 #pragma mark - KFEasyTimerUpdater
 - (void)timerUpdateWithInterval:(NSTimeInterval)interval {
     self.count -= interval;
     if (self.count <= 0) {
-        [self.timer stop];
+        [self.timer pause];
         [self.button setTitle:@"点击开始" forState:UIControlStateNormal];
         return;
     }

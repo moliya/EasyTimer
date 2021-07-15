@@ -19,7 +19,7 @@ class SwiftTableViewController: UIViewController, UITableViewDataSource {
         //指定为tableView
         timer.updater = tableView
         //开始计时
-        timer.start()
+        timer.run()
         let now = Date().timeIntervalSince1970
         timeInfo = [
             (
@@ -79,7 +79,7 @@ class SwiftTableViewController: UIViewController, UITableViewDataSource {
     }
     
     deinit {
-        timer.stop()
+        print(self.description + "已销毁")
     }
 }
 

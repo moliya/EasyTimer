@@ -25,11 +25,11 @@ class SwiftButtonController: UIViewController {
             return
         }
         count = 30
-        timer.start()
+        timer.run()
     }
     
     deinit {
-        timer.stop()
+        print(self.description + "已销毁")
     }
 }
 
@@ -37,7 +37,7 @@ extension SwiftButtonController: EasyTimerUpdater {
     func timerUpdate(interval: TimeInterval) {
         count -= interval
         if count <= 0 {
-            timer.stop()
+            timer.pause()
             button.setTitle("点击开始", for: .normal)
             return
         }

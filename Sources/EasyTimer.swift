@@ -14,12 +14,29 @@ public protocol EasyTimerUpdater: NSObjectProtocol {
 
 @objc(KFEasyTimer)
 open class EasyTimer: NSObject {
+    
+    enum TimerState {
+        case ready
+        case running
+        case paused
+    }
+    
     @objc open weak var updater: AnyObject?
     @objc open var interval: TimeInterval = 1
-    private var timer: DispatchSourceTimer?
+    private lazy var timer: DispatchSourceTimer = DispatchSource.makeTimerSource(flags: [], queue: .global())
+    private var state: TimerState = .ready
     
     public override init() {
         super.init()
+    }
+    
+    deinit {
+        if state == .running {
+            timer.cancel()
+        } else if state == .paused {
+            timer.resume()
+            timer.cancel()
+        }
     }
     
     @objc
@@ -28,9 +45,19 @@ open class EasyTimer: NSObject {
         self.interval = interval
     }
     
-    @objc(start)
-    public func start() {
-        let timer = DispatchSource.makeTimerSource(flags: [], queue: .global())
+    @objc(run)
+    public func run() {
+        if state != .ready {
+            if state == .running {
+                return
+            }
+            if state == .paused {
+                timer.resume()
+                state = .running
+            }
+            return
+        }
+        
         timer.schedule(wallDeadline: .now(), repeating: .milliseconds(Int(interval * 1000)))
         timer.setEventHandler {[weak self] in
             guard let self = self else { return }
@@ -63,11 +90,14 @@ open class EasyTimer: NSObject {
             }
         }
         timer.resume()
-        self.timer = timer
+        state = .running
     }
     
-    @objc(stop)
-    public func stop() {
-        timer?.cancel()
+    @objc(pause)
+    public func pause() {
+        if state == .running {
+            timer.suspend()
+            state = .paused
+        }
     }
 }
