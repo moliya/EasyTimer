@@ -26,6 +26,10 @@ open class EasyTimer: NSObject {
     private lazy var timer: DispatchSourceTimer = DispatchSource.makeTimerSource(flags: [], queue: .global())
     private var state: TimerState = .ready
     
+    public var isRunning: Bool {
+        return state == .running
+    }
+    
     public override init() {
         super.init()
     }
